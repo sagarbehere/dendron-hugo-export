@@ -11,4 +11,6 @@ The scripts
 - Process wikilinks like `[[label | pqr.abc.xyz.md ]]` in Dendron notes into a format that is preferred by Hugo: `[label]({{< ref "pqr/abc/xyz.md" >}})`.
 - Adds a Backlinks section to each note if backlinks to that note exist.
 
+These notes are meant to be executed in a particular sequence. See the file `dendron-export.sh`. Also, you'll need to configure the vault path, destdir, and exclude dirs and files in each Python script.
+
 **WARNING: The scripts are extremely immature. They were cobbled together by copy/paste'ing code from StackOverflow and may fail without warning in all sorts of edge cases. I stopped working on them as soon as they started working for my own use cases. :)**
