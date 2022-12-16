@@ -68,6 +68,23 @@ def create_index_files(dbconn): # This func moves e.g. foo/bar/baz.md to foo/bar
 				dbcursor.execute('''UPDATE files SET "fs_path" = ? WHERE "fs_path" = ?''', (str(pathlib.Path(root, dirs[indx], '_index.md')), str(pathlib.Path(root,file))))
 				shutil.move(pathlib.Path(root,file), pathlib.Path(root, dirs[indx], '_index.md'))
 	dbconn.commit()
+	# Now create _index.md files in all folders that don't have them
+	for items in os.walk(destdir):
+		files = items[2]
+		dirs = items[1]
+		root = items[0]
+		for dir in dirs:
+			indx_file = pathlib.Path(root, dir, '_index.md')
+			if not indx_file.exists():
+				# print (indx_file, "does not exist")
+				logging.info ("%s does not exist. Creating it.", indx_file)
+				indx_file.touch()
+				post = frontmatter.load(indx_file)
+				post['title'] = indx_file.parent.name.capitalize() # explanation: path = pathlib.Path('/folderA/folderB/folderC/file.md'); path.parent.name is 'folderC'
+				# NOTE: post['date'] will come later from the add_frontmatter_date() function
+				f = open(indx_file, 'wb') # Note the 'wb'. Need to open file for binary writing, else frontmatter.dump() will not work
+				frontmatter.dump(post, f)
+				f.close()
 	logging.info("Finished creating index files")
 
 def root_to_index(): # moves root.md in vault to content/notes/_index.md and modifies frontmatter
