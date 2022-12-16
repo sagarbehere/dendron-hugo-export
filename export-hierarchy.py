@@ -6,9 +6,9 @@ import sqlite3
 import frontmatter
 from datetime import datetime
 
-path = pathlib.Path("/home/sagar/Seafile/sync-enc/notes/vault/") 
+path = pathlib.Path("/home/sagar/Documents/dendron-notes/") 
 destdir = pathlib.Path("notes/") 
-exclude_dirs = ['logseq', 'journals', 'pages', '.vscode', 'daily', 'drafts', 'nopublish'] # relative to destdir
+exclude_dirs = ['logseq', 'journals', 'pages', '.vscode', 'daily', 'drafts', 'nopublish', 'templates', 'tags'] # relative to destdir
 exclude_files = ['drafts.md', 'daily.md', 'scratchpad.md', 'nopublish.md'] # filename to exclude in dotted notation
 
 def exclude_dir(test_path): # return True if test_path needs to be excluded

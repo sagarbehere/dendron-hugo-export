@@ -1,6 +1,6 @@
 #! /bin/sh
 
-DENDRON_VAULT=/home/sagar/Seafile/sync-enc/notes/vault
+DENDRON_VAULT=/home/sagar/Documents/dendron-notes
 HUGO_SITE=/home/sagar/sagar.se
 
 rm -rf notes/ logs/
